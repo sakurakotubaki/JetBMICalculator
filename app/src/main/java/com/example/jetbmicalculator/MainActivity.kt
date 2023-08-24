@@ -1,7 +1,6 @@
 package com.example.jetbmicalculator
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -18,7 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetbmicalculator.ui.theme.JetBMICalculatorTheme
-import kotlin.math.log
 
 class MainActivity : ComponentActivity() {
     private  val viewModel by viewModels<MainViewModel>()
