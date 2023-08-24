@@ -6,11 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetbmicalculator.ui.theme.JetBMICalculatorTheme
@@ -33,24 +36,79 @@ class MainActivity : ComponentActivity() {
                         Spacer(modifier = Modifier.padding(30.dp))
 
                         // 身長
-                        Text(text = "身長(cm)", color = Color(0xFFF85F64), fontWeight = FontWeight.Bold)
-                        // TextFieldを使って入力欄を作成
-                        TextField(
+                        PinkLabeledTextField(
                             value = "",
-                            onValueChange = { },
-                            colors = TextFieldDefaults.textFieldColors(
-                                backgroundColor = Color.Transparent// 透明にする
+                            onValueChange = {},
+                            label = "身長",
+                            placeholder = "170",
+                        )
+                        Spacer(modifier = Modifier.padding(20.dp))
+
+                        // 体重
+                        PinkLabeledTextField(
+                            value = "",
+                            onValueChange = {},
+                            label = "体重(kg)",
+                            placeholder = "65",
+                        )
+                        Spacer(modifier = Modifier.padding(20.dp))
+
+                        // 計算する
+                        Button(
+                            onClick = {},
+                            modifier = Modifier.fillMaxWidth(),// 画面幅いっぱいに広げる
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Color(0xFFF85F64)// 背景色をピンクにする
                             ),
+                        ) {
+                            Text(
+                                text = "計算する",
+                                color = Color.White,
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                        Spacer(modifier = Modifier.padding(20.dp))
+
+                        // 結果を表示テキスト
+                        Text(
+                            text = "あなたのBMIは00.0です",
                             modifier = Modifier.fillMaxWidth(),
-                            placeholder = {
-                                Text(text = "170")
-                            },
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                            singleLine = true// 1行のみ
+                            textAlign = TextAlign.Center,
+                            color = Color.Gray,
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.ExtraBold,
                         )
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun PinkLabeledTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    placeholder: String,
+) {
+    Column {
+        // 身長
+        Text(text = label, color = Color(0xFFF85F64), fontWeight = FontWeight.Bold)
+        // TextFieldを使って入力欄を作成
+        TextField(
+            value = value,
+            onValueChange = onValueChange,
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent// 透明にする
+            ),
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = {
+                Text(text = placeholder)
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            singleLine = true// 1行のみ
+        )
     }
 }
